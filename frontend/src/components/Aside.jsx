@@ -18,7 +18,7 @@ function Aside() {
         <div className="menu">
           <ul className="nav flex-column">
               <li className={"nav-item " + (activeLink === "home" ? "active" : "")}>
-                <Link className="nav-link" to="/" onClick={() => handleLinkClick("home")}>
+                <Link className="nav-link" to="/patient" onClick={() => handleLinkClick("home")}>
                     <img src="../../icons/home.png" alt="" />
                     <span>
                       Home
@@ -26,7 +26,7 @@ function Aside() {
                 </Link>
               </li>
               <li className={"nav-item " + (activeLink === "schedule" ? "active" : "")}>
-                <Link className="nav-link" to="/schedule" onClick={() => handleLinkClick("schedule")}>
+                <Link className="nav-link" to="/patient/schedule" onClick={() => handleLinkClick("schedule")}>
                     <img src="../../icons/schedule.png" alt="" />
                     <span>
                       Schedule
@@ -34,7 +34,7 @@ function Aside() {
                 </Link>
               </li>
               <li className={"nav-item " + (activeLink === "hospitals" ? "active" : "")}>
-                <Link className="nav-link" to="/hospitals" onClick={() => handleLinkClick("hospitals")}>
+                <Link className="nav-link" to="/patient/hospitals" onClick={() => handleLinkClick("hospitals")}>
                     <img src="../../icons/hospital.png" alt="" />
                     <span>
                       Hospitals
@@ -42,15 +42,15 @@ function Aside() {
                 </Link>
               </li>
               <li className={"nav-item " + (activeLink === "doctors" ? "active" : "")}>
-                <Link className="nav-link" to="/doctors" onClick={() => handleLinkClick("doctors")}>
-                    <img src="../../icons/doctor.png" alt="" />
+                <Link className="nav-link" to="/patient/doctors" onClick={() => handleLinkClick("doctors")}>
+                    <img src="../../icons/doctors.png" alt="" />
                     <span>
                       Doctors
                     </span>
                 </Link>
               </li>
               <li className={"nav-item " + (activeLink === "notifications" ? "active" : "")}>
-                <Link className="nav-link" to="/notifications" onClick={() => handleLinkClick("notifications")}>
+                <Link className="nav-link" to="/patient/notifications" onClick={() => handleLinkClick("notifications")}>
                     <img src="../../icons/notification.png" alt="" />
                     <span>
                       Notifications
