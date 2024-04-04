@@ -30,11 +30,40 @@ header{
         padding: 1rem;
         box-sizing: border-box;
         background-color: var(--aside-bg);
+        display: flex;
+        gap: 10px;
+        // justify-content: space-between;
+        align-items: center;
 
         img{
-            width: 70%;
             object-fit: contain;
         }
+        .menuToggle{
+            display: inline-flex;
+            width: 30px;
+            height: 30px;
+            position: relative;
+            float: right;
+            z-index: 1;
+
+            span{
+              position: absolute;
+              width: 100%;
+              height: 2px;
+              top: 50%;
+              left: 50%;
+              border-radius: 5px;
+              transform: translate(-50%, -50%);
+              background-color: #fff;
+              transition: 0.3s;
+            }
+            .line-1{
+              transform: translate(-50%, -10px);
+            }
+             .line-3{
+              transform: translate(-50%, 7px);
+            }
+          }
     }
     .searchSetting{
         width: 77%;
@@ -88,8 +117,16 @@ header{
             }
         }
     }
-
     
+    
+}
+@media screen and (max-width: 1000px) {
+    header{
+        background-color: var(--aside-bg);
+        .logoSection{
+            width: 39%;
+        }
+    }
 }
 
 
@@ -155,6 +192,9 @@ aside{
             }
         }
     }
+    @media screen and (max-width: 1000px) {
+        width: 100%; // Full width on smaller screens
+    }
 }
 
 main{
@@ -173,6 +213,7 @@ main{
     }
 
     .container{
+        min-width: 100%;
         width: 100%;
         height: 85vh;
         background-color: var(--main-bg);
@@ -397,10 +438,26 @@ main{
                         }
                     }
                 }
+                @media screen and (max-width: 1000px) {
+                        width: 24rem;
+                }
+                @media screen and (max-width: 1024px) and (min-width:500px) {
+                        width: 21rem;
+                }
+                @media screen and (max-width: 1500px) and (min-width:1300px) {
+                        width: 21rem;
+                }
             }
-        }
+        } 
+                
     }
+    @media screen and (max-width: 1000px) {
+        margin-left: 0; 
+        width: 100%;
+    }
+}
+
 
         //doctors components ends
 
-}
+
