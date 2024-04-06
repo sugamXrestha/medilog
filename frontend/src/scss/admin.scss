@@ -1,0 +1,21 @@
+.heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .title{
+        font-size: 2rem;
+    }
+
+    .addPatient{
+        background-color: var(--aside-bg);
+        padding: 0.3rem 0.5rem;
+        border-radius: 0.6rem;
+        cursor: pointer;
+        color: #fff;
+
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+}
