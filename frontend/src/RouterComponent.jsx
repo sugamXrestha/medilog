@@ -9,7 +9,9 @@ import LoginComponent from './components/auth/LoginComponent';
 import PatientComponentMiddleware from './components/middleware/PatientComponentMiddleware';
 import AdminRouterMiddleware from './components/middleware/AdminRouterMiddleware';
 import Dashboard from './components/admin/Dashboard';
-import AddPatientComponent from './components/admin/AddPatientComponent';
+import AddUserComponent from './components/admin/AddUserComponent';
+// import AddDoctorComponent from './components/admin/AddDoctorComponent';
+import ShowScheduleComponent from './components/admin/ShowScheduleComponent';
 
 function RouterComponent() {
   return (
@@ -25,7 +27,9 @@ function RouterComponent() {
             </Route>
             <Route path='/admin' element={<AdminRouterMiddleware />}>
               <Route path='/admin' element={<Dashboard />}></Route>
-              <Route path='patients' element={<AddPatientComponent/>}></Route>
+              <Route path='add-user' element={<AddUserComponent />}></Route>
+              {/* <Route path='add-doctors' element={<AddDoctorComponent/>}></Route> */}
+              <Route path='show-schedule' element={<ShowScheduleComponent />}></Route>
             </Route>
         </Routes>
     </>
