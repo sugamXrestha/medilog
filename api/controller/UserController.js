@@ -10,8 +10,7 @@ class UserController{
     }
     async store(req, res){
         try {
-            const { userCode, phone, password, role } = req.body;
-            const user = new User({ userCode, phone, password, role });
+            const user = new User({...req.body});
             await user.save();
             res.json(data);
             res.status(201).json({ message: 'User created successfully' });

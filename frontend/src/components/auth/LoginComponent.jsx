@@ -1,11 +1,49 @@
 import React, { useEffect, useState } from "react";
+import {useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import "../../scss/login.scss";
+import API from '../../API';
+
+const loginSchema = yup.object().shape({
+    userCode: yup.string().required(),
+    password: yup.string().required(),
+});
 
 function LoginComponent() {
+
+    const {register,setError, handleSubmit, reset, formState: {errors}} = useForm({
+        resolver: yupResolver(loginSchema)
+    });
+
     const [activeRole, setActiveRole] = useState('patient');
 
     const handleRoleClick = (role) =>{
         setActiveRole(role);
+    }
+
+    const login=(data)=>{
+        console.log(data)
+        API.post('/', data).then((response)=>{
+            if(response.data.userCodeError){
+                setError('userCode', {
+                    type: "manual",
+                    message: response.data.userCodeError
+                });
+            }else if(response.data.passwordError){
+                setError('password', {
+                    type: "manual",
+                    message: response.data.passwordError
+                });
+            }else{
+                
+                let token = response.data.token;
+                localStorage.setItem('token', token);
+                window.location.href = `/${activeRole}`;
+            }
+        }).catch((error)=>{
+            console.log(error);
+        });
     }
 
   return (
@@ -44,14 +82,20 @@ function LoginComponent() {
                             <p className="titleAdmin">Admin</p>
                         </div>
                     </div>
-                    <form action="">
+                    <form action="" onSubmit={handleSubmit(login)}>
                         <div className="form-group">
-                            <input type="text" className='form-control' placeholder='Usercode/Username' name="" id="" />
+                            <a className='text-danger'>
+                            {errors.userCode?.message && <span>{errors.userCode?.message}</span>}
+                            </a>
+                            <input type="text" className='form-control' placeholder='Usercode/Username' name="userCode" {...register("userCode")} />
                         </div>
                         <div className="form-group">
-                            <input type="password" className='form-control' placeholder='Password' name="" id="" />
+                            <a className='text-danger'>
+                            {errors.password?.message && <span>{errors.password?.message}</span>}
+                            </a>
+                            <input type="password" className='form-control' placeholder='Password' name="password" {...register("password")}/>
                         </div>
-                        <div className="btn">Login</div>
+                        <button className="btn">Login</button>
                     </form>
                     <p className="forgotPassword">Forgot your password?</p>
                 </div>

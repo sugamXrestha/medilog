@@ -1,10 +1,10 @@
 import express from "express";
 import userRoute from "./userRoute.js";
-import doctorRoute from "./doctorRoute.js";
+import loginRoute from "./loginRoute.js"
 
 const webRouter = express.Router();
 
 webRouter.use("/user", userRoute)
-webRouter.use("/doctor", doctorRoute)
+webRouter.use('/', loginRoute)
 
 export default webRouter;
