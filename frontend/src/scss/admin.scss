@@ -74,3 +74,23 @@ aside{
         }
     }
 }
+
+.tableContainer{
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 490px;
+
+    .table{
+        thead{
+            tr{
+
+                th{
+                    position: sticky;
+                    top: 0;
+                }
+            }
+        }
+    }
+}
+  

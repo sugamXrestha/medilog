@@ -8,6 +8,6 @@ userRoute.get("/", userInstance.index);
 userRoute.get("/:id", userInstance.show);
 userRoute.post("/", userInstance.store);
 userRoute.put("/:id", userInstance.update);
-userRoute.delete("/", userInstance.destroy);
+userRoute.delete("/:id", userInstance.destroy);
 
 export default userRoute

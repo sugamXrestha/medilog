@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import Swal from 'sweetalert2'
 import API from '../../API';
 
 const addPatientSchema = yup.object().shape({
-  userCode: yup.string().required(),
+  userCode: yup.number().required(),
   phone: yup.string().required(),
   password: yup.string().required(),
   role: yup.string().required(),
@@ -18,6 +19,7 @@ function AddPatientComponent() {
   });
 
   const [addUser, setAddUser] = useState('none');
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     const handleModel = (display) => {
       setAddUser(display);
@@ -32,25 +34,94 @@ function AddPatientComponent() {
   }, [addUser]);
   
 
-  const onSubmit = (data) => {
-    API.post('/user', data, {
+  const addUserSubmit = (data) => {
+    API.post('/user', data,{
       headers: {
           Authorization: `Bearer ${token}`
       }
   }).then((res)=>{
-      console.log(res);
       Swal.fire({
-          position: "top-center",
           icon: "success",
           title: res.data.message,
           showConfirmButton: false,
           timer: 1500
       });
+      getUser();
       reset();
   }).catch((error)=>{
       console.log(error);
   });
   };
+
+  const getUser = () => {
+    API.get("/user", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  const deleteUser = async (id) => {
+    try {
+      await API.delete(`/user/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your data has been deleted.",
+        icon: "success",
+      });
+
+      getUser();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const confirmDelete = (id) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          deleteUser(id);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            text: "Your imaginary file is safe :)",
+            icon: "error",
+          });
+        }
+      });
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   
 
@@ -60,30 +131,56 @@ function AddPatientComponent() {
         <p className='title'>User List</p>
         <p className="addPatient" onClick={() => setAddUser('flex')}>Add User</p>
       </div>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>S.N</th>
-            <th>UserCode</th>
-            <th>Phone</th>
-            <th>Role</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-      </table>
+
+<div className="tableContainer">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>S.N</th>
+              <th>UserCode</th>
+              <th>Phone</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {users &&
+              users.map((user, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{++index}</td>
+                    <td>{user.userCode}</td>
+                    <td>{user.phone}</td>
+                    <td>{user.role}</td>
+                    <td></td>
+                    
+                    <td>
+                      <button className='btn btn-primary me-2'>Edit</button>
+                      <button className='btn btn-danger' onClick={() => confirmDelete(user._id)}>Delete</button>
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+
+</div>
+
+      
 
       <div className="addBackground" id='addUserModel' style={{display: addUser}}>
         <div className="addContainer">
           <span className='close' onClick={() => setAddUser('none')}>
             <img src="../icons/cross.png" alt="" />
           </span>
-          <p className='heading'>Add Patients</p>
+          <p className='heading'>Add User</p>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(addUserSubmit)}>
             <div className="form-group mb-2">
               <label>User Code</label>
-              <input type="text" {...register("userCode")} className="form-control" placeholder='User Code' />
+              <input type="number" {...register("userCode")} className="form-control" placeholder='User Code' />
               {errors.userCode && <span className='text-danger'>{errors.userCode.message}</span>}
             </div>
             <div className="form-group mb-2">

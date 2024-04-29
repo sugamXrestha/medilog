@@ -6,9 +6,10 @@ dotenv.config();
 
 const userSchema = new mongoose.Schema({
     userCode: { 
-        type: String,
+        type: Number,
         required: true, 
-        unique: true 
+        unique: true,
+        minlength:6
     },
     phone: { 
         type: String, 
