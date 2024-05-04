@@ -5,6 +5,7 @@ const userRoute = express.Router();
 const userInstance = new UserController();
 
 userRoute.get("/", userInstance.index);
+userRoute.get("/profile",userInstance.getProfile);
 userRoute.get("/:id", userInstance.show);
 userRoute.post("/", userInstance.store);
 userRoute.put("/:id", userInstance.update);

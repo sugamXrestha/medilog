@@ -1,10 +1,8 @@
 import React from "react";
-import Header from "../Header";
 
 function HomeComponent() {
   return (
     <>
-      <Header />
       <main>
         <div className="container">
           <div>

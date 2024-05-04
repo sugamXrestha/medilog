@@ -30,6 +30,7 @@ function AddPatientComponent() {
     return () => {
       // Cleanup function
       document.removeEventListener('click', handleModel);
+      // document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, [addUser]);
   

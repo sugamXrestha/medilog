@@ -44,6 +44,17 @@ userSchema.methods.comparePassword = async function(password){
     return await bcrypt.compare(password, this.password);
 }
 
+// --> for image
+userSchema.methods.toJSON = function(){
+    const obj = this.toObject();
+    if(obj.image){
+        obj.image = `${process.env.PUBLIC_URL}/users/${obj.image}`;
+    }else{
+        obj.image = `${process.env.PUBLIC_URL}/icons/user.svg`;
+    }
+    return obj;
+};
+
 // --> generate token
 userSchema.methods.generateToken = function(){
     let secret = process.env.JWT_SECRET;

@@ -12,20 +12,20 @@ import Dashboard from './components/admin/Dashboard';
 import AddUserComponent from './components/admin/AddUserComponent';
 // import AddDoctorComponent from './components/admin/AddDoctorComponent';
 import ShowScheduleComponent from './components/admin/ShowScheduleComponent';
-import UserKYCComponent from './components/UserKYCComponent';
+import UserDetailComponent from './components/patient/UserDetailComponent';
 
 function RouterComponent() {
   return (
     <>
         <Routes>
             <Route path="/" element={<LoginComponent />}></Route>
-            <Route path='/user-detail' element={<UserKYCComponent />}></Route>
             <Route path='/patient' element={<PatientComponentMiddleware />}>
               <Route path="/patient" element={<HomeComponent />}></Route>
               <Route path="schedule" element={<ScheduleComponent />}></Route>
               <Route path="hospitals" element={<HospitalsComponent />}></Route>
               <Route path="doctors" element={<DoctorComponent />}></Route>
               <Route path="notifications" element={<NotificationsComponent />}></Route>
+              <Route path='user-detail' element={<UserDetailComponent />}></Route>
             </Route>
             <Route path='/admin' element={<AdminRouterMiddleware />}>
               <Route path='/admin' element={<Dashboard />}></Route>

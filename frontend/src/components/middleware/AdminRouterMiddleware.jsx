@@ -1,27 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {Outlet} from 'react-router-dom'
 import { Link } from "react-router-dom";
+import Header from "../Header";
 
 function AdminRouterMiddleware() {
 
-    const [isSmallScreen, setIsSmallScreen] = useState(false);
-    
-    useEffect(() => {
-    const handleResize = () => {
-        setIsSmallScreen(window.innerWidth < 1000);
-    };
 
-    // Add event listener for window resize
-    window.addEventListener("resize", handleResize);
-
-    // Call handleResize on component mount to set initial state
-    handleResize();
-
-    // Clean up event listener on component unmount
-    return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
-    const [activeLink, setActiveLink] = useState(localStorage.getItem('activeLink') || "home"); // State to manage active link
+    const [activeLink, setActiveLink] = useState("home" || localStorage.getItem('activeLink')); // State to manage active link
 
   // Function to handle link click and set activeLink state
   const handleLinkClick = (link) => {
@@ -30,7 +15,7 @@ function AdminRouterMiddleware() {
   };
   return (
     <>
-        <header>
+        {/* <header>
             <div className="logoSection">
             {isSmallScreen ? 
             (
@@ -57,8 +42,8 @@ function AdminRouterMiddleware() {
                     </div>
                 </div>
             </div>
-        </header>
-
+        </header> */}
+        <Header />
         <aside>
         
         <div className="menu adminMenu">

@@ -11,6 +11,13 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+
+    form{
+        .text-danger{
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+    }
 }
 
 ::-webkit-scrollbar{
@@ -32,7 +39,6 @@ header{
     position: fixed;
     top: 0;
     background-color: var(--body-bg);
-    // z-index: 1;
     display: flex;
 
     .logoSection{
@@ -115,11 +121,13 @@ header{
             align-items: center;
             cursor: pointer;
 
-            .profile{
-                width: 40px;
-                height: 40px;
+            .headerProfile{
+                width: 35px;
+                height: 35px;
                 
                 img{
+                    padding: 2px;
+                    background-color: var(--bs-gray-200);
                     border-radius: 50%;
                     width: 100%;
                     object-fit: cover;
@@ -139,6 +147,109 @@ header{
     }
 }
 
+.profileBackground{
+    position: relative;
+    top: 68px;
+    right: 20px;
+    background-color: var(--body-bg);
+    width: 300px;
+    float: right;
+    z-index: 90000;
+    border-radius: 15px;
+    padding: 20px;
+    color: #000;
+    
+    p{
+        margin: 0;
+    }
+
+    .userProfile{
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        cursor: pointer;
+        padding: 10px;
+        border-bottom: 2px solid #717171;
+        margin-bottom: 2px;
+
+        .profile{
+            width: 35px;
+            height: 35px;
+            
+            img{
+                padding: 2px;
+                background-color: var(--bs-gray-200);
+                border-radius: 50%;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+        .userName{
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+
+        &:hover{
+            background-color: #a7cc9d;
+            border-radius: 10px;
+        }
+    }
+    .changeProfile{
+        padding: 10px;
+        a{
+            text-decoration: none;
+            color: #0078d7;
+
+            &:hover{
+                background-color: none;
+            }
+        }
+
+        &:hover{
+            background-color: #a7cc9d;
+            border-radius: 10px;
+        }
+    }
+
+    .editDetails{
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        cursor: pointer;
+        padding: 10px;
+        text-decoration: none;
+        color: #000;
+
+        &:hover{
+            background-color: #a7cc9d;
+            border-radius: 10px;
+        }
+    }
+    .help{
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        cursor: pointer;
+        padding: 10px;
+
+        &:hover{
+            background-color: #a7cc9d;
+            border-radius: 10px;
+        }
+    }
+    .logout{
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        cursor: pointer;
+        padding: 10px;
+
+        &:hover{
+            background-color: #a7cc9d;
+            border-radius: 10px;
+        }
+    }
+}
 
 aside{
     width: 20%;
@@ -462,6 +573,107 @@ main{
                 
     }
 
+    .kycContainer{
+        background-color: var(--body-bg);
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        // padding: 3rem;
+        
+        .formSteps{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            cursor: pointer;
+    
+            .stepsItem{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 130px;
+                text-align: center;
+    
+                .stepsNumber{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 30px;
+                    height: 30px;
+                    border: 3px solid #8c8c8c;
+                    color: #8c8c8c;
+                    font-weight: 600;
+                    border-radius: 50%;
+                }
+                .stepsTitle{
+                    color: #8c8c8c;
+                }
+    
+                &.active{
+                    .stepsNumber{
+                        background-color: #0078d7;
+                        // background-color: var(--sec-color);
+                        border: transparent;
+                        color: #fff;
+                    }
+                    .stepsTitle{
+                        color: #0078d7;
+                        // color: var(--sec-color);
+                    }
+                }
+                
+            }
+            span{
+                margin: 3px -66px;
+                color: #8c8c8c;
+            }
+        }
+    
+        .formContainer{
+            background-color: var(--main-bg);
+            width: 70%;
+            overflow-y: auto;
+            max-height: 450px;
+            padding: 2rem;
+            margin-top: 1rem;
+            border-radius: 5px;
+            
+            form{
+                .title{
+                    text-align: center;
+                    font-size: 1.3rem;
+                    font-weight: 700;
+                }
+                .button-group{
+                    display: flex;
+                    justify-content: space-between;
+                    
+                    .btnColor{
+                        // background-color: var(--sec-color);
+                        background-color: #0078d7;
+                        margin-top: 0.7rem;
+                        padding: 0.4rem 1.4rem;
+                        color: #fff;
+                        
+                        &:hover{
+                            opacity: 0.9;
+                        }
+                    }
+                    .btnSubmit{
+                        float: right;
+                        margin-top: 0.7rem;
+                        padding: 0.4rem 1.4rem;
+                        color: #fff;
+                        background-color: var(--aside-bg);
+    
+                        &:hover{
+                            opacity: 0.9;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     
       
@@ -474,103 +686,4 @@ main{
 
         //doctors components ends
 
-.kycContainer{
-    background-color: var(--body-bg);
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 3rem;
-    min-height: 100vh;
-    
-    .formSteps{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        cursor: pointer;
 
-        .stepsItem{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 130px;
-            text-align: center;
-
-            .stepsNumber{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 30px;
-                height: 30px;
-                border: 3px solid #8c8c8c;
-                color: #8c8c8c;
-                font-weight: 600;
-                border-radius: 50%;
-            }
-            .stepsTitle{
-                color: #8c8c8c;
-            }
-
-            &.active{
-                .stepsNumber{
-                    background-color: #0078d7;
-                    // background-color: var(--sec-color);
-                    border: transparent;
-                    color: #fff;
-                }
-                .stepsTitle{
-                    color: #0078d7;
-                    // color: var(--sec-color);
-                }
-            }
-            
-        }
-        span{
-            margin: 3px -66px;
-            color: #8c8c8c;
-        }
-    }
-
-    .formContainer{
-        background-color: var(--main-bg);
-        width: 70%;
-        
-        padding: 2rem;
-        margin-top: 1rem;
-        
-        form{
-            .title{
-                text-align: center;
-                font-size: 1.3rem;
-                font-weight: 700;
-            }
-            .button-group{
-                display: flex;
-                justify-content: space-between;
-                
-                .btnColor{
-                    // background-color: var(--sec-color);
-                    background-color: #0078d7;
-                    margin-top: 0.7rem;
-                    padding: 0.4rem 1.4rem;
-                    color: #fff;
-                    
-                    &:hover{
-                        opacity: 0.9;
-                    }
-                }
-                .btnSubmit{
-                    float: right;
-                    margin-top: 0.7rem;
-                    padding: 0.4rem 1.4rem;
-                    color: #fff;
-                    background-color: var(--aside-bg);
-
-                    &:hover{
-                        opacity: 0.9;
-                    }
-                }
-            }
-        }
-    }
-}
