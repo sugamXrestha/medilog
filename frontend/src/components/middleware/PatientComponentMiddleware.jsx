@@ -16,7 +16,7 @@ function PatientComponentMiddleware() {
         Authorization: `Bearer ${token}`
       }
     }).then(response =>{
-      console.log(response.data);
+      // console.log(response.data);
       if(response.data.status){
         setIsLogin(true);
         setIsLoading(false);
@@ -44,9 +44,9 @@ function PatientComponentMiddleware() {
             <Aside />
             <Header />
 
-            <div>
+            <main>
                 <Outlet />
-            </div>
+            </main>
           </>
         ) : (
           (window.location.href = "/")

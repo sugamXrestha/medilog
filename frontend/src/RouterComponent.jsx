@@ -13,14 +13,21 @@ import AddUserComponent from './components/admin/AddUserComponent';
 // import AddDoctorComponent from './components/admin/AddDoctorComponent';
 import ShowScheduleComponent from './components/admin/ShowScheduleComponent';
 import UserDetailComponent from './components/patient/UserDetailComponent';
+import ProfileComponent from './components/ProfileComponent';
+import AddPrescriptionComponent from './components/admin/AddPrescriptionComponent';
+import AddSpecificPrescriptionComponent from './components/admin/AddSpecificPrescriptionComponent';
+import ChangePasswordComponent from './components/auth/ChangePasswordComponent';
+import HospitalDetailComponent from './components/admin/HospitalDetailComponent';
 
 function RouterComponent() {
   return (
     <>
         <Routes>
             <Route path="/" element={<LoginComponent />}></Route>
+            <Route path ="/change-password" element={<ChangePasswordComponent />}></Route>
             <Route path='/patient' element={<PatientComponentMiddleware />}>
               <Route path="/patient" element={<HomeComponent />}></Route>
+              <Route path=":id" element={<ProfileComponent />}></Route>
               <Route path="schedule" element={<ScheduleComponent />}></Route>
               <Route path="hospitals" element={<HospitalsComponent />}></Route>
               <Route path="doctors" element={<DoctorComponent />}></Route>
@@ -32,6 +39,9 @@ function RouterComponent() {
               <Route path='add-user' element={<AddUserComponent />}></Route>
               {/* <Route path='add-doctors' element={<AddDoctorComponent/>}></Route> */}
               <Route path='show-schedule' element={<ShowScheduleComponent />}></Route>
+              <Route path='add-prescription' element={<AddPrescriptionComponent />}></Route>
+              <Route path='add-prescription/:id' element={<AddSpecificPrescriptionComponent />}></Route>
+              <Route path='add-hospital_detail' element={<HospitalDetailComponent />}></Route>
             </Route>
         </Routes>
     </>

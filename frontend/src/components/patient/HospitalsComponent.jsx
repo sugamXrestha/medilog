@@ -2,9 +2,7 @@ import React from 'react'
 
 function HospitalsComponent() {
   return (
-    <div>
-
-    </div>
+    <div>HospitalsComponent</div>
   )
 }
 

@@ -161,5 +161,54 @@
 
         }
 
+        
+
     }
+
+    // change password component starts
+    
+    .change-password-form{
+        // width: 40%;
+        // height: 50%;
+        box-sizing: border-box;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0 rgba(10, 10, 10, 0.5);
+
+        form{
+            .form-group{
+                margin-bottom: 1rem;
+
+                label{
+                    font-size: 1.2rem;
+                }
+
+                .form-control{
+                    padding: 0.475rem 0.75rem;
+                    &:focus{
+                        box-shadow: 1px 1px 5px #7ccc64;
+                    }
+                    &::placeholder{
+                        color: #a9acac;
+                    }
+                }
+            }
+            .btn{
+                width: 100%;
+                background-color: var(--sec-color);
+                color: #000;
+                font-size: 1.2rem;
+
+                &:hover{
+                    opacity: 0.8;
+                    
+
+                }
+            }
+        }
+
+    }
+
+
+    // change password component ends
 }

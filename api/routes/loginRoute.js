@@ -5,6 +5,7 @@ const loginRoute = express.Router();
 const loginInstance = new LoginController();
 
 loginRoute.post('/', loginInstance.login);
+// loginRoute.get('/:id', loginInstance.show);
 loginRoute.get('/token-verify',  loginInstance.tokenVerify);
 
 

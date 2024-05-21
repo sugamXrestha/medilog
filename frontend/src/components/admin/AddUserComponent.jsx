@@ -7,14 +7,17 @@ import API from '../../API';
 
 const addPatientSchema = yup.object().shape({
   userCode: yup.number().required(),
+  name: yup.string().required(),
   phone: yup.string().required(),
   password: yup.string().required(),
   role: yup.string().required(),
+  category: yup.string(),
+  stat: yup.string(),
 });
 
 function AddPatientComponent() {
   const token = localStorage.getItem("token") ?? "";
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset,watch, formState: { errors } } = useForm({
     resolver: yupResolver(addPatientSchema),
   });
 
@@ -36,6 +39,8 @@ function AddPatientComponent() {
   
 
   const addUserSubmit = (data) => {
+    data.stat = "pending";
+    console.log(data);
     API.post('/user', data,{
       headers: {
           Authorization: `Bearer ${token}`
@@ -61,6 +66,7 @@ function AddPatientComponent() {
       },
     })
       .then((response) => {
+        // console.log(response.data)
         setUsers(response.data);
       })
       .catch((error) => {
@@ -124,7 +130,7 @@ function AddPatientComponent() {
     getUser();
   }, []);
 
-  
+  const selectedRole = watch('role');
 
   return (
     <>
@@ -133,12 +139,13 @@ function AddPatientComponent() {
         <p className="addPatient" onClick={() => setAddUser('flex')}>Add User</p>
       </div>
 
-<div className="tableContainer">
+      <div className="tableContainer">
         <table className="table">
           <thead>
             <tr>
               <th>S.N</th>
               <th>UserCode</th>
+              <th>Name</th>
               <th>Phone</th>
               <th>Role</th>
               <th>Status</th>
@@ -153,9 +160,10 @@ function AddPatientComponent() {
                   <tr key={index}>
                     <td>{++index}</td>
                     <td>{user.userCode}</td>
+                    <td>{user.name}</td>
                     <td>{user.phone}</td>
                     <td>{user.role}</td>
-                    <td></td>
+                    <td>{user.stat}</td>
                     
                     <td>
                       <button className='btn btn-primary me-2'>Edit</button>
@@ -167,7 +175,7 @@ function AddPatientComponent() {
           </tbody>
         </table>
 
-</div>
+      </div>
 
       
 
@@ -183,6 +191,11 @@ function AddPatientComponent() {
               <label>User Code</label>
               <input type="number" {...register("userCode")} className="form-control" placeholder='User Code' />
               {errors.userCode && <span className='text-danger'>{errors.userCode.message}</span>}
+            </div>
+            <div className="form-group mb-2">
+              <label>Name</label>
+              <input type="text" {...register("name")} className="form-control" placeholder='Name' />
+              {errors.name && <span className='text-danger'>{errors.name.message}</span>}
             </div>
             <div className="form-group mb-2">
               <label>Phone no</label>
@@ -207,6 +220,13 @@ function AddPatientComponent() {
                     <option value="admin">Admin</option>
                 </select>
             </div>
+            {selectedRole === 'doctor' && (
+              <div className="form-group mb-2">
+                <label>Category</label>
+                <input type="text" {...register("category")} className="form-control" placeholder='Category' />
+                {errors.category && <span className='text-danger'>{errors.category.message}</span>}
+              </div>
+            )}
             <div className="form-group mb-2">
               <button className="btn btn-primary" type='submit'>Add User</button>
             </div>

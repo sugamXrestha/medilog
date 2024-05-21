@@ -1,35 +1,18 @@
 import mongoose from "mongoose";
 
 const UserDetailSchema = new mongoose.Schema({
-    user: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    userCode: { 
-        type: Number,
-        // required: true, 
-        unique: true,
-    },
-    phone: { 
-        type: String, 
-        // required: true 
-    },
-    fullName:{
-        type: String,
-        required: true
-    },
     dobAD:{
-        type: Date,
+        type: String,
         required: true
     },
     gender:{
         type: String,
         enum: ["Male", "Female"],
         required: true
-    },
-    phone:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
     },
     email:{
         type: String,
@@ -58,18 +41,12 @@ const UserDetailSchema = new mongoose.Schema({
     sonDaughterName:{
         type: String
     },
-    perProvince:{
-        type: String,
+    perCity:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'City',
         required: true
     },
-    perDistrict:{
-        type: String,
-        required: true
-    },
-    perMunicipality:{
-        type: String,
-        required: true
-    },
+    
     perWard:{
         type: Number,
         required: true
@@ -78,18 +55,12 @@ const UserDetailSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    tempProvince:{
-        type: String,
+    tempCity:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'City',
         required: true
     },
-    tempDistrict:{
-        type: String,
-        required: true
-    },
-    tempMunicipality:{
-        type: String,
-        required: true
-    },
+    
     tempWard:{
         type: Number,
         required: true

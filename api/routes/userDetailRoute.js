@@ -5,6 +5,7 @@ const userDetailRoute = express.Router();
 const userDetailInstance = new UserDetailController();
 
 userDetailRoute.get("/", userDetailInstance.index);
+userDetailRoute.get("/:id", userDetailInstance.show);
 userDetailRoute.post("/", userDetailInstance.store)
 
 

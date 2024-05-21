@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Aside() {
 
-  const [activeLink, setActiveLink] = useState("home"); // State to manage active link
+  const [activeLink, setActiveLink] = useState("home" || localStorage.getItem('activeLink')); // State to manage active link
 
   // Function to handle link click and set activeLink state
   const handleLinkClick = (link) => {

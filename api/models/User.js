@@ -11,6 +11,10 @@ const userSchema = new mongoose.Schema({
         unique: true,
         minlength:6
     },
+    name:{
+        type: String,
+        required: true
+    },
     phone: { 
         type: String, 
         required: true 
@@ -24,9 +28,15 @@ const userSchema = new mongoose.Schema({
         enum: ["admin", "doctor", "patient"],
         default: "patient"
     },
-    image: {
+    category:{
         type: String
     },
+    stat:{
+        type: String,
+    },
+    image: {
+        type: String
+    }
 },{
     versionKey: false
 })

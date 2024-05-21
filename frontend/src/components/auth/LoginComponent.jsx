@@ -38,20 +38,35 @@ function LoginComponent() {
                 
                 let token = response.data.token;
                 localStorage.setItem('token', token);
+                const stat = response.data.stat;
                 const role = response.data.role;
-            
-                if (role === 'admin') {
-                    window.location.href = '/admin';
-                } else if (role === 'doctor') {
-                    window.location.href = '/doctor';
-                } else if (role === 'patient') {
-                    window.location.href = '/patient';
+                localStorage.setItem('userId', response.data.id);
+                if(stat === 'pending'){
+                    localStorage.setItem('userId', response.data.id);
+                    window.location.href = '/change-password';
+                }else{
+                    if (role === 'admin') {
+                        window.location.href = '/admin';
+                    } else if (role === 'doctor') {
+                        window.location.href = '/admin';
+                    } else if (role === 'patient') {
+                        window.location.href = '/patient';
+                    }
                 }
+                
             }
         }).catch((error)=>{
             console.log(error);
         });
     }
+
+    useEffect(() => {
+        // Clear the token from local storage on page refresh
+        return () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+        };
+    }, []);
 
   return (
     <>
